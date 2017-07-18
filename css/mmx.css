@@ -1,0 +1,27 @@
+body {
+overflow: hidden;
+}
+.bottomBar {
+position: fixed;bottom: 0;left:0;right:0;height:60px;
+margin:0;padding:0;border-top: 1px solid rgba(0,0,0,0.2);
+
+}
+.bottomBar ul {
+  list-style: none;
+  margin:0;padding:0;
+  display: block;
+  width:100%;
+  background: red;
+}
+
+
+.bottomBar ul li {
+  font-size: 42px;
+  padding: 0;
+  line-height: 70px;
+  height: 60px;
+  border-left:1px solid rgba(0,0,0,.2);
+  float: left;display:inline;width:50%;
+  text-align: center;
+  color:#595959;
+}
