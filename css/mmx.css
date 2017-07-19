@@ -30,15 +30,14 @@ z-index: 6;
 .bottomBar ul li {
   font-size: 16px;
   padding: 0;
-  line-height: 70px;
+  line-height: 60px;
   height: 60px;
   border-left:1px solid rgba(0,0,0,.2);
-  float: left;display:inline;width:50%;
+  float: left;display:inline;width:33.33333%;
   text-align: center;
   color:#595959;
   background: -webkit-linear-gradient(top, #fafafa 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-
 }
 
 .bottomBar ul li:hover , .bottomBar ul li:active {
@@ -68,10 +67,15 @@ background: linear-gradient(to bottom,#371700  7%, #883900 98%); /* W3C, IE10+, 
 
 .screen.full {
 height: 85vh;
+height: calc(100vh - 60px);
+background: -webkit-linear-gradient(top,#620000  7%, #DD0000 98%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,#620000  7%, #DD0000 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
 }
 
 .screen , .screen.full {
 transition: all 1s ease;
+-webkit-transition: all 1s cubic-bezier(0.180, 0, 0.540, 1);
 }
 
 
@@ -97,9 +101,13 @@ font-weight: bold;
 
 .screen.full .recette {
   font-size: 12vh;line-height:63vh;
+  color:#FFD5D5;
+  text-shadow: 0px 0px 8px rgba(255,176,176, 0.5);
 }
 
-.screen.full .recette , .recette {transition: all 1s ease;}
+
+
+.screen.full .recette , .recette {transition: all 1s ease;-webkit-transition: all 1s cubic-bezier(0.180, 0, 0.540, 1);}
 .screen.full .madress {display: block}
 
 

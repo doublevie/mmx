@@ -28,6 +28,9 @@ var mmx = {
   currentFile : '' ,
   userName : Android.getUser ,
   passWord : Android.getPass ,
+  config : {
+animation : true,
+  },
   init : function(){
     document.querySelector('.username').focus();
 
@@ -98,14 +101,12 @@ window.setTimeout(function(){
        data: {'user':user ,'file':file,'callback':'x'},
        dataType: 'json',
        success: function(responseData, textStatus, jqXHR) {
-          //  console.log(responseData);
            mmx.showData(responseData);
            mmx.openInfos();
-
        },
        error: function (responseData, textStatus, errorThrown) {
           console.log(errorThrown);
-          // console.log(responseData.responseText);
+            console.log(responseData.responseText);
         //mmx.failed();
        }
    });
@@ -150,18 +151,41 @@ _('.status').innerText = 'Hors ligne';
 
 
 var Acounter = {
+  anim: function(target,val) {
+    var old = mf(target.innerText),
+   options = {
+  useEasing : true,
+  useGrouping : true,
+  separator : ' ',
+  decimal : '.',
+};
+var demo = new CountUp(target, old, val, 2, 1.5, options);
+demo.start();
+  },
   today : function(d) {
     var today = moment().format("YYYYMMDD");
 
     var res = 0;
     if (d[today] ) res = d[today].val;
-    _('.recette').innerText = fm(res);
+if (mmx.config.animation) {
+Acounter.anim(_('.recette'),res);
+}else {
+  _('.recette').innerText = fm(res);
+}
 
   } ,
   yesterday: function(d){
     var yest = moment().add(-1, 'days').format("YYYYMMDD") ,res = 0;
     if (d[yest] ) res = d[yest].val;
-    _('[hier]').innerText = fm(res);
+
+
+    if (mmx.config.animation) {
+    Acounter.anim(_('[hier]'),res);
+    }else {
+     _('[hier]').innerText = fm(res);
+    }
+
+
   },
   thisWeek : function(d){
     var lastw = moment().add(-6 ,'days').format("YYYYMMDD"),
@@ -171,7 +195,11 @@ var Acounter = {
 for (k in d) {
 if (mf(k) >= lastw && mf(k) <= tod) res += mf(d[k].val);
 }
-_('[cettesemaine]').innerText = fm(res);
+ if (mmx.config.animation) {
+Acounter.anim(_('[cettesemaine]'),res);
+}else {
+ _('[cettesemaine]').innerText = fm(res);
+}
   } ,
   lastWeek : function(d){
     var lastw = moment().add(-13 ,'days').format("YYYYMMDD"),
@@ -180,7 +208,11 @@ _('[cettesemaine]').innerText = fm(res);
 for (k in d) {
 if (mf(k) >= lastw && mf(k) <= tod) res += mf(d[k].val);
 }
+ if (mmx.config.animation) {
+Acounter.anim(_('[semainepasse]'),res);
+}else {
 _('[semainepasse]').innerText = fm(res);
+}
   }
 
 }
