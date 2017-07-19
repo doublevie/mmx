@@ -4,6 +4,7 @@ overflow: hidden;
 .bottomBar {
 position: fixed;bottom: 0;left:0;right:0;height:60px;
 margin:0;padding:0;border-top: 1px solid rgba(0,0,0,0.2);
+z-index: 6;
 
 }
 .bottomBar ul {
@@ -24,4 +25,34 @@ margin:0;padding:0;border-top: 1px solid rgba(0,0,0,0.2);
   float: left;display:inline;width:50%;
   text-align: center;
   color:#595959;
+}
+
+.mainInfos {
+position: fixed;left:0;right:0;top:0;right:0;
+opacity: 0;pointer-events: none;
+}
+
+.mainInfos.show {
+  opacity: 1;pointer-events: auto;z-index: 5;
+  bottom:60px;
+}
+.mainInfos .screen {
+  padding: 15px;
+  height:30vh;
+/*  /*background: #371700;*/
+  /*color:#FFE082;*/
+  background: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+
+.mainInfos .screen .mname {
+line-height: 3vh;
+font-size: 16px;
+}
+
+
+.mainInfos .screen .recette {
+  text-align: right;
+  font-size: 5vh;line-height: 8vh;
 }
