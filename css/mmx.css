@@ -1,6 +1,15 @@
 body {
 overflow: hidden;
 }
+
+@font-face {
+  font-family: 'digital-7';
+  font-style: Normal;
+  font-weight: 400;
+  src: local('digital-7'), url('../fonts/digital-7.ttf') format('truetype');
+}
+
+
 .bottomBar {
 position: fixed;bottom: 0;left:0;right:0;height:60px;
 margin:0;padding:0;border-top: 1px solid rgba(0,0,0,0.2);
@@ -15,9 +24,11 @@ z-index: 6;
   background: red;
 }
 
+.price {font-family: 'digital-7';white-space: nowrap;}
+.table tr td[right] {text-align: right;}
 
 .bottomBar ul li {
-  font-size: 42px;
+  font-size: 16px;
   padding: 0;
   line-height: 70px;
   height: 60px;
@@ -27,6 +38,9 @@ z-index: 6;
   color:#595959;
 }
 
+.bottomBar ul li:hover , .bottomBar ul li:active {
+  background: #FFECB3;
+}
 .mainInfos {
 position: fixed;left:0;right:0;top:0;right:0;
 opacity: 0;pointer-events: none;
@@ -38,21 +52,66 @@ opacity: 0;pointer-events: none;
 }
 .mainInfos .screen {
   padding: 15px;
-  height:30vh;
-/*  /*background: #371700;*/
-  /*color:#FFE082;*/
-  background: white;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  height:25vh;
+   background: #371700;
+ color:#FFE082;
+ position: relative;
+  /*background: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);*/
+  background: -webkit-linear-gradient(top,#371700  7%, #883900 98%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,#371700  7%, #883900 98%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
+
+
+.screen.full {
+height: 60vh;
+}
+
+.screen , .screen.full {
+transition: all 1s ease;
+}
+
 
 
 .mainInfos .screen .mname {
-line-height: 3vh;
+line-height: 4vh;
 font-size: 16px;
+font-weight: bold;
+}
+
+.screen .madress {display: none;
+  line-height: 3vh;
+  font-size: 14px;
+}
+
+.mainInfos .screen .recette {
+  color: #FFF8E1;
+  text-align: right;
+  font-size: 10vh;line-height:14vh;
+  text-shadow: 0px 0px 8px rgba(255, 205, 55, 0.5);
 }
 
 
-.mainInfos .screen .recette {
-  text-align: right;
-  font-size: 5vh;line-height: 8vh;
+.screen.full .recette {
+  font-size: 12vh;line-height:33vh;
+}
+
+.screen.full .recette , .recette {transition: all 1s ease;}
+.screen.full .madress {display: block}
+
+
+
+
+.infBL {position: absolute;left:15px;bottom:10px;font-size: 14px;line-height: 14px;width:50%;}
+.infBR {position: absolute;right:15px;bottom:10px;font-size: 14px;line-height: 14px;width:50%;text-align: right;}
+
+
+.onoff {color:#212121}
+.onoff.on {color:#76FF03}
+.onoff.blink {-webkit-animation: blink 0.3s infinite;}
+
+
+@-webkit-keyframes blink {
+    from {color: #212121;}
+    to {color: #76FF03;}
 }

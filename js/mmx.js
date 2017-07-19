@@ -8,8 +8,11 @@ getPass : function() {
 
 }
 
-var base = 'http://frequency-dz.com/api/menumax/2.0/';
 
+function _(x) {return document.querySelector(x);}
+var base = 'http://frequency-dz.com/api/menumax/2.0/';
+// var moment = moment();
+moment.locale('fr');
 
 
 
@@ -22,9 +25,14 @@ var mmx = {
   userName : Android.getUser ,
   passWord : Android.getPass ,
   init : function(){
+    document.querySelector('.username').focus();
 
   },
   Disconnect : function(){
+mmx.closeInfos();
+document.querySelector('.username').value = "";
+document.querySelector('.username').focus();
+document.querySelector('.password').value = "";
 
   } ,
   connect : function(){
@@ -81,7 +89,9 @@ window.setTimeout(function(){
        data: {'user':user ,'file':file,'callback':'x'},
        dataType: 'json',
        success: function(responseData, textStatus, jqXHR) {
-           console.log(responseData);
+          //  console.log(responseData);
+           mmx.showData(responseData);
+           mmx.openInfos();
 
        },
        error: function (responseData, textStatus, errorThrown) {
@@ -91,10 +101,30 @@ window.setTimeout(function(){
        }
    });
  } ,
+ openInfos : function(){
+   _('.mainInfos').classList.add('show');
+ } ,
+ closeInfos : function(){
+   _('.mainInfos').classList.remove('show');
+ },
  showData : function(d){
-   
+console.log(d);
+var mmnt = moment(d.infos.now , "YYYY-MM-DD HH:mm").fromNow();
+
+_('.fromNow').innerText = mmnt;
+_('.mname').innerText = d.infos.Cname;
+_('.madress').innerText = d.infos.Cadress;
+
+
 
  }
 
 
+} ;
+
+
+var Acounter = {
+  today : function(d) {
+
+  }
 }

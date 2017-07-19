@@ -7,6 +7,7 @@
      <title>MenuMax</title>
      <link href="css/bootstrap.min.css" rel="stylesheet">
      <link href="css/mmx.css" rel="stylesheet">
+     <link href="css/font-awesome.min.css" rel="stylesheet">
 
   </head>
   <body>
@@ -14,35 +15,65 @@
 <br>
 
 <div class="container"  >
-<input type="text" class="form-control username" name="user" placeholder="Utilisateur">
+<input type="text" class="form-control username" name="user" placeholder="Utilisateur" value="abc">
 <br>
-<input type="password" class="form-control password" name="pass" placeholder="Mot de passe">
+<input type="password" class="form-control password" name="pass" placeholder="Mot de passe" value="abc">
 
 <br>
 <button type="button" name="button" class="btn btn-warning btn-block login" onclick="mmx.connect()">Connexion</button>
 
 
+
+</div>
+
+
+
+<div class="mainInfos ">
+  <div class="screen" onclick="this.classList.toggle('full')">
+
+<div class="mname">FREQUENCY</div>
+<div class="madress"></div>
+<div  class="recette price">1 500.00</div>
+
+
+<div class="infBL ">
+<i class="fa fa-circle onoff blink">  </i>
+
+<span class="fromNow"></span>
+</div>
+
+
+<div class="infBR">
+5 minutes
+</div>
+
+
+
+</div>
+<div class="">
+<table class="table table-bordered table-striped">
+<tr><td>HIER</td><td right>15 000.00 </td></tr>
+<tr><td>CETTE SEMAINE</td><td right>35 000.00 </td></tr>
+</table>
+</div>
+
+
+
+
+
 <div class="bottomBar">
 <ul>
   <li><span class="glyphicon glyphicon-star"></span></li>
-  <li><span class="glyphicon glyphicon-remove"></span></li>
+  <li onclick="mmx.Disconnect()"><i class="fa fa-sign-out"></i></li>
   <li><span></span></li>
 </ul>
 </div>
-</div>
 
-
-
-<div class="mainInfos show">
-  <div class="screen">
-
-<div class="mname">FREQUENCY</div>
-<div  class="recette">0.00</div>
-  </div>
 
 </div>
 
 
+    <script src="js/moment-with-locales.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 <script src="js/mmx.js" charset="utf-8"></script>
