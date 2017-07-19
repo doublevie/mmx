@@ -36,6 +36,9 @@ z-index: 6;
   float: left;display:inline;width:50%;
   text-align: center;
   color:#595959;
+  background: -webkit-linear-gradient(top, #fafafa 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #fafafa 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
 }
 
 .bottomBar ul li:hover , .bottomBar ul li:active {
@@ -64,7 +67,7 @@ background: linear-gradient(to bottom,#371700  7%, #883900 98%); /* W3C, IE10+, 
 
 
 .screen.full {
-height: 60vh;
+height: 85vh;
 }
 
 .screen , .screen.full {
@@ -93,7 +96,7 @@ font-weight: bold;
 
 
 .screen.full .recette {
-  font-size: 12vh;line-height:33vh;
+  font-size: 12vh;line-height:63vh;
 }
 
 .screen.full .recette , .recette {transition: all 1s ease;}

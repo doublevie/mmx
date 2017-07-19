@@ -109,12 +109,23 @@ window.setTimeout(function(){
  },
  showData : function(d){
 console.log(d);
-var mmnt = moment(d.infos.now , "YYYY-MM-DD HH:mm").fromNow();
+var up = moment(d.infos.now , "YYYY-MM-DD HH:mm"),
+mmnt = up.fromNow(),
+diff = moment().diff(up ,'minutes');
 
 _('.fromNow').innerText = mmnt;
-_('.mname').innerText = d.infos.Cname;
+_('.mname').innerText = d.infos.Cname.toUpperCase();
 _('.madress').innerText = d.infos.Cadress;
 
+_('.onoff').classList.remove('blink');
+if (diff > 60) {
+_('.onoff').classList.remove('on');
+_('.status').innerText = 'Hors ligne';
+// window.setTimeout(function(){_('.screen').classList.add('full');},1000)
+} else {
+  _('.status').innerText = 'En ligne';
+  _('.onoff').classList.add('on');
+}
 
 
  }
