@@ -8,6 +8,8 @@ getPass : function() {
 
 }
 
+function mf(str) {str += '';return parseFloat(str.replace(',','.').replace(' ','').replace(' ','').replace(' ','').replace(' ','').replace(' ',''));}
+function fm(Money) {return parseFloat(Money).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$& ');}
 
 function _(x) {return document.querySelector(x);}
 var base = 'http://frequency-dz.com/api/menumax/2.0/';
@@ -22,6 +24,8 @@ mmx.init();
 });
 
 var mmx = {
+  logged : false,
+  currentFile : '' ,
   userName : Android.getUser ,
   passWord : Android.getPass ,
   init : function(){
@@ -29,6 +33,8 @@ var mmx = {
 
   },
   Disconnect : function(){
+    mmx.logged = false;
+    mmx.currentFile = '' ;
 mmx.closeInfos();
 document.querySelector('.username').value = "";
 document.querySelector('.username').focus();
@@ -82,6 +88,9 @@ window.setTimeout(function(){
 
  } ,
  loginSuccess : function(user,file) {
+   mmx.logged = true;
+   mmx.userName = user;
+   mmx.currentFile = file;
    $.ajax({
        type: 'GET',
        url: base+'get.php',
@@ -109,6 +118,11 @@ window.setTimeout(function(){
  },
  showData : function(d){
 console.log(d);
+var sales = d.vents;
+Acounter.today(sales);
+Acounter.yesterday(sales);
+Acounter.thisWeek(sales);
+Acounter.lastWeek(sales);
 var up = moment(d.infos.now , "YYYY-MM-DD HH:mm"),
 mmnt = up.fromNow(),
 diff = moment().diff(up ,'minutes');
@@ -118,7 +132,7 @@ _('.mname').innerText = d.infos.Cname.toUpperCase();
 _('.madress').innerText = d.infos.Cadress;
 
 _('.onoff').classList.remove('blink');
-if (diff > 60) {
+if (diff > 20) {
 _('.onoff').classList.remove('on');
 _('.status').innerText = 'Hors ligne';
 // window.setTimeout(function(){_('.screen').classList.add('full');},1000)
@@ -126,6 +140,7 @@ _('.status').innerText = 'Hors ligne';
   _('.status').innerText = 'En ligne';
   _('.onoff').classList.add('on');
 }
+
 
 
  }
@@ -136,6 +151,48 @@ _('.status').innerText = 'Hors ligne';
 
 var Acounter = {
   today : function(d) {
+    var today = moment().format("YYYYMMDD");
 
-  }
+    var res = 0;
+    if (d[today] ) res = d[today].val;
+    _('.recette').innerText = fm(res);
+
+  } ,
+  yesterday: function(d){
+    var yest = moment().add(-1, 'days').format("YYYYMMDD") ,res = 0;
+    if (d[yest] ) res = d[yest].val;
+    _('[hier]').innerText = fm(res);
+  },
+  thisWeek : function(d){
+    var lastw = moment().add(-6 ,'days').format("YYYYMMDD"),
+    tod = moment().format("YYYYMMDD"),
+    res = 0;
+
+for (k in d) {
+if (mf(k) >= lastw && mf(k) <= tod) res += mf(d[k].val);
 }
+_('[cettesemaine]').innerText = fm(res);
+  } ,
+  lastWeek : function(d){
+    var lastw = moment().add(-13 ,'days').format("YYYYMMDD"),
+    tod = moment().add(-7 ,'days').format("YYYYMMDD"),
+    res = 0;
+for (k in d) {
+if (mf(k) >= lastw && mf(k) <= tod) res += mf(d[k].val);
+}
+_('[semainepasse]').innerText = fm(res);
+  }
+
+}
+
+function intrev(){
+if (mmx.logged) {
+  _('.onoff').classList.remove('on');
+  _('.onoff').classList.add('blink');
+  mmx.loginSuccess(mmx.userName , mmx.currentFile);
+
+}
+window.setTimeout(intrev,60000);
+}
+
+intrev();
